@@ -4,49 +4,60 @@ package com.example.event_management_platform.controller;
 import com.example.event_management_platform.model.Event;
 import com.example.event_management_platform.service.EventService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
+
 
 @RestController
 @RequestMapping("/api/events")
 @CrossOrigin
 @RequiredArgsConstructor
 public class EventController {
-    private final EventService service;
+
+    @Autowired
+    private EventService eventService;
+
+    @PostMapping
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        return new ResponseEntity<>(eventService.createEvent(event), HttpStatus.CREATED);
+    }
 
     @GetMapping
-    public List<Event> getAll() {
-        return service.getAllEvents();
+    public List<Event> getAllEvents() {
+        return eventService.getAllEvents();
     }
 
     @GetMapping("/{id}")
-    public Event get(@PathVariable Long id) {
-        return service.getEventById(id);
-    }
-
-    @PostMapping
-    public Event create(@RequestBody Event e) {
-        return service.createEvent(e);
+    public ResponseEntity<Event> getEventById(@PathVariable Long id) {
+        return eventService.getEventById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public Event update(@PathVariable Long id, @RequestBody Event e) {
-        return service.updateEvent(id, e);
+    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event event) {
+        return ResponseEntity.ok(eventService.updateEvent(id, event));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.deleteEvent(id);
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/monthly-counts")
-    public List<Object[]> eventsByMonth() {
-        return service.countEventsByMonth();
+    @GetMapping("/chart/month")
+    public List<Object[]> getEventCountByMonth() {
+        return eventService.getEventCountByMonth();
     }
 
-    @GetMapping("/type-counts")
-    public List<Object[]> eventsByType() {
-        return service.countEventsByType();
+    @GetMapping("/chart/type")
+    public List<Object[]> getEventCountByType() {
+        return eventService.getEventCountByType();
     }
 }
+
 

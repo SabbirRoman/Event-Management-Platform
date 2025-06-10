@@ -5,15 +5,15 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String description;
     private LocalDateTime startDate;
@@ -21,4 +21,7 @@ public class Event {
     private String eventType;
     private boolean isPublic;
     private int maxAttendees;
+
+    // Getters and Setters
 }
+

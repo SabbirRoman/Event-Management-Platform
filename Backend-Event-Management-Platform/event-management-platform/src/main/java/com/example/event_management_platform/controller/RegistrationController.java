@@ -4,6 +4,9 @@ package com.example.event_management_platform.controller;
 import com.example.event_management_platform.model.Registration;
 import com.example.event_management_platform.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -11,32 +14,30 @@ import java.util.List;
 @RequestMapping("/api/registrations")
 @CrossOrigin
 @RequiredArgsConstructor
+
 public class RegistrationController {
-    private final RegistrationService service;
 
-    @GetMapping
-    public List<Registration> getAll() {
-        return service.getAllRegistrations();
-    }
-
-    @GetMapping("/{id}")
-    public Registration get(@PathVariable Long id) {
-        return service.getRegistrationById(id);
-    }
+    @Autowired
+    private RegistrationService registrationService;
 
     @PostMapping("/event/{eventId}")
-    public Registration register(@PathVariable Long eventId, @RequestBody Registration r) {
-        return service.register(eventId, r);
+    public ResponseEntity<Registration> register(@PathVariable Long eventId, @RequestBody Registration registration) {
+        return new ResponseEntity<>(registrationService.register(eventId, registration), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.deleteRegistration(id);
+    @GetMapping
+    public List<Registration> getAllRegistrations() {
+        return registrationService.getAllRegistrations();
     }
 
     @GetMapping("/event/{eventId}")
-    public List<Registration> getByEvent(@PathVariable Long eventId) {
-        return service.getRegistrationsByEvent(eventId);
+    public List<Registration> getRegistrationsByEvent(@PathVariable Long eventId) {
+        return registrationService.getRegistrationsByEvent(eventId);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRegistration(@PathVariable Long id) {
+        registrationService.deleteRegistration(id);
+        return ResponseEntity.noContent().build();
     }
 }
-

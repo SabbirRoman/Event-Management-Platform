@@ -7,10 +7,11 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +24,6 @@ public class Registration {
     private String attendeeName;
     private String attendeeEmail;
     private LocalDateTime registrationDate;
+
+    // Getters and Setters
 }

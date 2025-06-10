@@ -5,6 +5,7 @@ import com.example.event_management_platform.model.Registration;
 import com.example.event_management_platform.repository.EventRepository;
 import com.example.event_management_platform.repository.RegistrationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,32 +13,28 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RegistrationService {
-    private final RegistrationRepository registrationRepository;
-    private final EventRepository eventRepository;
+    @Autowired
+    private RegistrationRepository registrationRepository;
+
+    @Autowired
+    private EventRepository eventRepository;
+
+    public Registration register(Long eventId, Registration registration) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Event not found"));
+        registration.setEvent(event);
+        registration.setRegistrationDate(LocalDateTime.now());
+        return registrationRepository.save(registration);
+    }
 
     public List<Registration> getAllRegistrations() {
         return registrationRepository.findAll();
     }
 
-    public Registration getRegistrationById(Long id) {
-        return registrationRepository.findById(id).orElse(null);
-    }
-
-    public Registration register(Long eventId, Registration reg) {
-        Event event = eventRepository.findById(eventId).orElse(null);
-        if (event == null) return null;
-        reg.setEvent(event);
-        reg.setRegistrationDate(LocalDateTime.now());
-        return registrationRepository.save(reg);
+    public List<Registration> getRegistrationsByEvent(Long eventId) {
+        return registrationRepository.findByEventId(eventId);
     }
 
     public void deleteRegistration(Long id) {
         registrationRepository.deleteById(id);
     }
-
-    public List<Registration> getRegistrationsByEvent(Long eventId) {
-        Event event = eventRepository.findById(eventId).orElse(null);
-        return registrationRepository.findByEvent(event);
-    }
 }
-
