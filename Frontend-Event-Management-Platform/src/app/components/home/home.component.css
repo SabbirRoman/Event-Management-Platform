@@ -1,0 +1,31 @@
+.home-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-container h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.home-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #34495e;
+}
+
+.home-container ul {
+  margin-top: 1rem;
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.home-container ul li {
+  margin-bottom: 0.5rem;
+  color: #555;
+}

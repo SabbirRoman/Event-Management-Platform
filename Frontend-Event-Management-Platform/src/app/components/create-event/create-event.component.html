@@ -1,0 +1,35 @@
+<div class="form-container">
+  <h2>Create Event</h2>
+
+  <form (ngSubmit)="createEvent()" #eventForm="ngForm">
+    <label>Title</label>
+    <input type="text" name="title" [(ngModel)]="event.title" required />
+
+    <label>Description</label>
+    <textarea name="description" [(ngModel)]="event.description" required></textarea>
+
+    <label>Start Date</label>
+    <input type="datetime-local" name="startDate" [(ngModel)]="event.startDate" required />
+
+    <label>End Date</label>
+    <input type="datetime-local" name="endDate" [(ngModel)]="event.endDate" required />
+
+    <label>Event Type</label>
+    <select name="eventType" [(ngModel)]="event.eventType">
+      <option value="Conference">Conference</option>
+      <option value="Workshop">Workshop</option>
+      <option value="Seminar">Seminar</option>
+      <option value="Meetup">Meetup</option>
+    </select>
+
+    <label>
+      <input type="checkbox" name="isPublic" [(ngModel)]="event.isPublic" />
+      Public
+    </label>
+
+    <label>Max Attendees</label>
+    <input type="number" name="maxAttendees" [(ngModel)]="event.maxAttendees" min="1" required />
+
+    <button type="submit" [disabled]="!eventForm.form.valid">Create Event</button>
+  </form>
+</div>

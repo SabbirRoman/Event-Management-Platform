@@ -1,0 +1,63 @@
+/* Previous styles... */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.modal label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.modal input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  box-sizing: border-box;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.modal-buttons button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+}
+
+.modal-buttons button[type="submit"] {
+  background-color: #27ae60;
+  color: white;
+}
+
+.modal-buttons button[type="button"] {
+  background-color: #e74c3c;
+  color: white;
+}
