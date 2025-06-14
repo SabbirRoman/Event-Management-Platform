@@ -41,12 +41,14 @@ public class EventService {
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
     }
-
+    
     public List<Object[]> getEventCountByMonth() {
-        return eventRepository.countEventsByMonth();
+        return eventRepository.countEventsByMonth(); // [['Jan', 5], ['Feb', 8]]
     }
+
 
     public List<Object[]> getEventCountByType() {
-        return eventRepository.countEventsByType();
+        return eventRepository.countEventsByType(); // [['Conference', 6], ['Workshop', 3]]
     }
+
 }

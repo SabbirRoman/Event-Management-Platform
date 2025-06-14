@@ -12,9 +12,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/registrations")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200") // Angular frontend
 @RequiredArgsConstructor
-
 public class RegistrationController {
 
     @Autowired
@@ -22,6 +21,16 @@ public class RegistrationController {
 
     @PostMapping("/event/{eventId}")
     public ResponseEntity<Registration> register(@PathVariable Long eventId, @RequestBody Registration registration) {
+        return new ResponseEntity<>(registrationService.register(eventId, registration), HttpStatus.CREATED);
+    }
+
+    // ✅ This one is for frontend POSTing { event: { id: X }, attendeeName, attendeeEmail }
+    @PostMapping
+    public ResponseEntity<Registration> register(@RequestBody Registration registration) {
+        Long eventId = registration.getEvent().getId();
+        if (eventId == null) {
+            return ResponseEntity.badRequest().build();
+        }
         return new ResponseEntity<>(registrationService.register(eventId, registration), HttpStatus.CREATED);
     }
 
