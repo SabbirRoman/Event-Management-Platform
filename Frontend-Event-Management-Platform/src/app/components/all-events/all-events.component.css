@@ -1,5 +1,28 @@
 /* Previous styles... */
 
+.event-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  /* background-color: #FFEED9; */
+}
+
+.event-card button {
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 5px;
+  width : 15rem;
+}
+.event-card button:hover {
+  background-color: #2980b9;
+}
+/* Modal styles */
+
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -18,12 +41,13 @@
   padding: 2rem;
   border-radius: 10px;
   max-width: 400px;
-  width: 100%;
+
+  /* width: 100%; */
 }
 
 .modal h3 {
   margin-top: 0;
-  color: #2c3e50;
+  color: #2c3e50 !important;
 }
 
 .modal label {
@@ -43,6 +67,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  margin: 15px;
 }
 
 .modal-buttons button {

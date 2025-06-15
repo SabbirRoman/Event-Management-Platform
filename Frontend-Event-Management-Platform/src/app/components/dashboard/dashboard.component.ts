@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
     this.fetchTypeData();
   }
 
+  
   fetchMonthlyData() {
     this.http.get<[string, number][]>('http://localhost:8080/api/events/chart/month')
       .subscribe((response) => {

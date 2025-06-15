@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+
+
+.caveat-font {
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.light1{
+    background-color: #E0F4FF;
+}
+.lightpink{
+    color: #FFEED9;
+}
+.lightblue{
+    color: #87C4FF;
+}
+.darkblue{
+    color: #39A7FF;
+}
+
+.body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
